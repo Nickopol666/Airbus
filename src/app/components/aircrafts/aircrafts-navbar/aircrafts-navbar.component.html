@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-sm">
+    <ul class="nav navbar-nav">
+        <li>
+            <button class="btn btn-outline-info m-2" (click)="getAllAircrafts()">Tous les avions</button>
+            <button class="btn btn-outline-info m-2" (click)="getDesignedAircrafts()">Avions en etude</button>
+            <button class="btn btn-outline-info m-2" (click)="getDevelopmentAircrafts()">Avions en construction</button>
+            <form action="" method="get" class="form-example" (ngSubmit)="onSearch($actionEvent.payload:value)">
+            <div class="form-example">
+                <label for="site-search">search</label>
+                <input type="search" id="site-search" name="q">
+                <button class="btn btn-outline-info m-2" (click)="search()">search</button>
+            </div>
+            </form>
+        </li>
+    </ul>
+</nav>

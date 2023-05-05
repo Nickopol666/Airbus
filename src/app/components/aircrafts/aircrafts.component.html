@@ -1,27 +1,28 @@
+<app-aircrafts-navbar (eventEmitter)="onActionEvent($event)"></app-aircrafts-navbar>
+<ng-container *ngIf="aircrafts$ |async as result" [ngSwitch]="result.dataState">
 
-<div>
-    <ul class="navbar navbar-nav">
-        <li>
-            <button class="btn btn-outline-info m-2" (click)="getAllAircrafts()">Aircrafts</button>
-            <button class="btn btn-outline-info m-2" (click)="getDesignedAircraftsR()">Design</button>
-            <button class="btn btn-outline-info m-2" (click)="getDevelopmentAircraftsR()">Development</button>
-            <!-- <button class="btn btn-outline-info m-2" (click)="getAircraftByMsnR(1)">Id</button> -->
-        </li>
-    </ul>
-    <ng-container *ngIf="error">
-        <div class="p-2 text-danger">{{error}}</div>
-    </ng-container>
-    <ng-container *ngIf="aircrafts$">
-        <table class= "table table-striped">
+        <ng-container *ngSwitchCase="dataStateEnum.LOADING">
+            <div class="p-2">Loading</div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="dataStateEnum.LOADED">
+            <div class="p-2">Loaded</div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="dataStateEnum.ERROR">
+            <div class="p-2 text-danger">{{result.errorMessage}}</div>
+        </ng-container>
+    
+        <table class= "table">
             <tr>
-                <th>Id</th><th>Program</th><th>Design</th><th>Development</th>
+                <th>Id</th><th>Program</th><th>Design</th><th>Developpment</th>
             </tr>
-            <tr *ngFor="let aircraft of aircrafts$ |async">
+            <tr *ngFor="let aircraft of result.data">
                 <td>{{aircraft.id}}</td>
                 <td>{{aircraft.prog}}</td>
                 <td>{{aircraft.design}}</td>
                 <td>{{aircraft.development}}</td>
             </tr>
-        </table>
-    </ng-container>
-</div>
+         </table>
+    
+</ng-container>
